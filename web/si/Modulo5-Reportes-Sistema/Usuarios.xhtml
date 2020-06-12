@@ -18,7 +18,7 @@
         la página inicie para evitar fallos-->
         <script src="../../Resources/js/prefix.js" type="text/javascript"></script>
         <!-- Se incluye el icono del sistema -->
-        <link rel="shorcut icon" href="../../Resources/img/Sistema/logoVersionFinal.png"/>
+        <link rel="shorcut icon" href="../../Resources/img/Sistema/LOGOFavicon.png"/>
         <!-- Nombre que se visualizará en el navegador -->
         <title>Usuarios</title>
 
@@ -146,479 +146,84 @@
                                     <a href="##{r.rol}">#{r.rol}</a>
                                 </li>
                             </c:forEach>
-                            
+
                         </ul>
                     </div>
                     <div id="todos" class="col s12 fondoTab">
 
 
                         <h:form>
-                            <h:commandLink><ion-icon name="logo-windows"></ion-icon><p:dataExporter target="tblCoor" type="xls" fileName="ReporteCoordinador"></p:dataExporter></h:commandLink>
-                            <p:dataTable value="#{usuarioControlador.consultarUsuarios()}" var="item">
+                            <h:commandLink>
+                                <img src="../../Resources/img/Sistema/excel.png" alt="" class="iconExcel"/>
+                                <p:dataExporter target="tblAll" type="xls" fileName="UsuariosRegistrados"></p:dataExporter>
+                            </h:commandLink>
+                            <p:dataTable id="tblAll"  widgetVar="tblAllUsers" value="#{usuarioControlador.consultarUsuarios()}" var="usuAll"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         paginator="true" rows="10" style="margin-bottom:5px" emptyMessage="No cars found with given criteria" filteredValue="#{usuarioControlador.consultarUsuarios()}"
+                                         filterEvent="#{usuarioControlador.globalFilterFunction}">
+                                <f:facet name="header">
+                                    <p:outputPanel>
+                                        <h:outputText value="Search all fields:" />
+                                        <p:inputText id="globalFilter" onkeyup="PF('tblAllUsers').filter()" style="width:150px" placeholder="Enter keyword"/>
+                                    </p:outputPanel>
+                                </f:facet>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="IdUsuario"/>
+                                        <h:outputText value="NIUP"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.idUsuario}"/>
+                                    <h:outputText value="#{usuAll.idTipo.tipo}"/><br/>
+                                    <h:outputText value="#{usuAll.numerodeDocumento}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="NumerodeDocumento"/>
+                                        <h:outputText value="Nombre Completo"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.numerodeDocumento}"/>
+                                    <h:outputText value="#{usuAll.nombre}"/><br/>
+                                    <h:outputText value="#{usuAll.apellido}"/>
                                 </p:column>
+
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
+                                        <h:outputText value="Dirección"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.nombre}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.apellido}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="FechadeNacimiento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechadeNacimiento}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Direccion"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.direccion}"/>
+                                    <h:outputText value="#{usuAll.direccion}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="Celular"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.celular}"/>
+                                    <h:outputText value="#{usuAll.celular}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="TelefonoFijo"/>
+                                        <h:outputText value="Telefono"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.telefonoFijo}"/>
+                                    <h:outputText value="#{usuAll.telefonoFijo}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Genero"/>
+                                        <h:outputText value="Correo"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.genero}"/>
+                                    <h:outputText value="#{usuAll.correoElectronico}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="CorreoElectronico"/>
+                                        <h:outputText value="Rol"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.correoElectronico}"/>
+                                    <h:outputText value="#{usuAll.idRoles.rol}"/>
                                 </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Contrasenna"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.contrasenna}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Foto"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.foto}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Estado"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.estado}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="IdRoles"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.idRoles}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="IdTipo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.idTipo}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Acudiente"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.acudiente}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Docente"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.docente}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Estudiante"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.estudiante}"/>
-                                </p:column>
+
                             </p:dataTable>
                         </h:form>
 
                     </div>
                     <c:forEach items="#{rolControlador.consultarRol()}" var="ro">
                         <div id="#{ro.rol}" class="col s12 fondoTab">
-                            
+
                         </div>
                     </c:forEach>
                 </h:form>
-                <div id="todos" class="col s12 fondoTab">
 
-                    <f:view>
-
-                        <h:form>
-                            <h:commandLink>
-                                <img src="../../Resources/img/Sistema/icono_excel.png" alt="" class="iconExcel"/>
-                                <p:dataExporter target="tblCoor" type="xls" fileName="ReporteCoordinador"></p:dataExporter></h:commandLink>
-                            <p:dataTable id="tblCoor" value="#{usuarioControlador.consultarUsuarios()}" var="coor">
-
-                                <p:column filterBy="#{coor.idUsuario}" >
-                                    <f:facet name="header">
-                                        <h:outputText value="IdUsuario"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.idUsuario}"/>
-                                </p:column>
-                                <p:column filterBy="#{coor.numerodeDocumento}">
-                                    <f:facet name="header">
-                                        <h:outputText value="NumerodeDocumento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.numerodeDocumento}"/>
-                                </p:column>
-                                <p:column filterBy="#{coor.nombre}">
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.nombre}"/>
-                                </p:column>
-                                <p:column filterBy="#{coor.apellido}">
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.apellido}"/>
-                                </p:column>
-                                <p:column filterBy="#{coor.fechadeNacimiento}">
-                                    <f:facet name="header">
-                                        <h:outputText value="FechadeNacimiento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.fechadeNacimiento}">
-                                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                                    </h:outputText>
-                                </p:column>
-                                <p:column filterBy="#{coor.direccion}">
-                                    <f:facet name="header">
-                                        <h:outputText value="Direccion"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.direccion}"/>
-                                </p:column>
-                                <p:column filterBy="#{coor.celular}">
-                                    <f:facet name="header">
-                                        <h:outputText value="Celular"/>
-                                    </f:facet>
-                                    <h:outputText value="#{coor.celular}"/>
-                                </p:column>
-
-                            </p:dataTable>
-                        </h:form>
-                    </f:view>
-
-                </div>
-                <div id="coor" class="col s12 fondoTab">
-
-                    <h:form>
-                        <h:commandLink><ion-icon name="logo-windows"></ion-icon><p:dataExporter target="tblCoor" type="xls" fileName="ReporteCoordinador"></p:dataExporter></h:commandLink>
-                        <p:dataTable id="tblCoor" value="#{usuarioControlador.consultarUsuarios()}" var="coor">
-
-                            <p:column filterBy="#{coor.idUsuario}" >
-                                <f:facet name="header">
-                                    <h:outputText value="IdUsuario"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.idUsuario}"/>
-                            </p:column>
-                            <p:column filterBy="#{coor.numerodeDocumento}">
-                                <f:facet name="header">
-                                    <h:outputText value="NumerodeDocumento"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.numerodeDocumento}"/>
-                            </p:column>
-                            <p:column filterBy="#{coor.nombre}">
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.nombre}"/>
-                            </p:column>
-                            <p:column filterBy="#{coor.apellido}">
-                                <f:facet name="header">
-                                    <h:outputText value="Apellido"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.apellido}"/>
-                            </p:column>
-                            <p:column filterBy="#{coor.fechadeNacimiento}">
-                                <f:facet name="header">
-                                    <h:outputText value="FechadeNacimiento"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.fechadeNacimiento}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column filterBy="#{coor.direccion}">
-                                <f:facet name="header">
-                                    <h:outputText value="Direccion"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.direccion}"/>
-                            </p:column>
-                            <p:column filterBy="#{coor.celular}">
-                                <f:facet name="header">
-                                    <h:outputText value="Celular"/>
-                                </f:facet>
-                                <h:outputText value="#{coor.celular}"/>
-                            </p:column>
-
-                        </p:dataTable>
-                    </h:form>
-
-
-                </div>
-                <div id="doc" class="col s12 fondoTab">
-                    <f:view>
-
-
-                        <h:form>
-
-                            <h:dataTable styleClass="centered" value="#{usuarioControlador.buscarRol(1)}" var="usuario">
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="NUIP"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.numerodeDocumento}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.nombre}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.apellido}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha de Nacimiento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.fechadeNacimiento}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Dirección"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.direccion}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Celular"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.celular}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Telefono Fijo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.telefonoFijo}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Correo Electronico"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.correoElectronico}"/>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Rol"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idRoles.rol}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Tipo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idTipo.tipo}"/>
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
-                    </f:view>
-
-                </div>
-                <div id="est" class="col s12 fondoTab">
-
-                    <f:view>
-
-
-                        <h:form>
-
-                            <h:dataTable styleClass="centered" value="#{usuarioControlador.buscarRol(1)}" var="usuario">
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="NUIP"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.numerodeDocumento}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.nombre}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.apellido}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha de Nacimiento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.fechadeNacimiento}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Dirección"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.direccion}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Celular"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.celular}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Telefono Fijo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.telefonoFijo}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Correo Electronico"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.correoElectronico}"/>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Rol"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idRoles.rol}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Tipo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idTipo.tipo}"/>
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
-                    </f:view>
-                </div>
-                <div id="acu" class="col s12 fondoTab">
-
-                    <f:view>
-
-
-                        <h:form>
-
-                            <h:dataTable styleClass="centered" value="#{usuarioControlador.buscarRol(1)}" var="usuario">
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="NUIP"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.numerodeDocumento}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.nombre}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Apellido"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.apellido}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha de Nacimiento"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.fechadeNacimiento}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" />
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Dirección"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.direccion}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Celular"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.celular}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Telefono Fijo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.telefonoFijo}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Correo Electronico"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.correoElectronico}"/>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Rol"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idRoles.rol}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Tipo"/>
-                                    </f:facet>
-                                    <h:outputText value="#{usuario.idTipo.tipo}"/>
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
-                    </f:view>
-                </div>
             </div>
         </main>
 
@@ -627,7 +232,7 @@
         <script src="../../Resources/js/materialize.min.js" type="text/javascript"></script>
         <!-- Se vincula al script AutoIniti el cual contiene el inicializador automático de los elementos de materialize -->
         <script>
-            M.AutoInit();
+                                            M.AutoInit();
         </script>
         <!-- Se hace uso de la iconografia de ionicons -->
         <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>

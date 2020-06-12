@@ -7,7 +7,7 @@ and open the template in the editor.
     Created on : 1/06/2020, 10:00:26 AM
     Author     : kesgr
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
 /* Se reinician las margenes y espaciados predeterminados del navegador y se establecen  en 0*/
 *{
     margin: 0;
@@ -78,7 +78,7 @@ body::-webkit-scrollbar-thumb{
     width: 45px;
     height: 40px;
     position: fixed;
-    
+
     right: 0;
     border-radius: 50px 0 0 50px;
     cursor: pointer;
@@ -162,7 +162,7 @@ main .contenedorTitulos{
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    
+
     margin-top: 45px;
     margin-bottom:  20px;
 }
@@ -188,10 +188,66 @@ main .tabs{
 }
 
 .iconExcel{
-    width: 15px;
-    height: 15px;
+    width: 40px;
+    height: 40px;
+    margin: 0.6rem;
+    
 }
 
+.ui-state-default, .ui-widget-content .ui-state-default{
+    border: 1px solid #a8a8a8;
+    /*background: #c4c4c4 url(http://localhost:8080/POV_Gaes7/faces/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png?ln=primefaces-aristo) 50% 50% repeat-x;
+    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));*/
+    background-color: #b71c1c;
+    font-weight: normal;
+    padding: 0.3rem 0.5rem;
+    color: #ecebeb;
+    
+}
+
+.ui-widget-header .ui-state-default {
+    background-color: whitesmoke;
+}
+
+.ui-widget {
+    font-family: 'Roboto',sans-serif;
+    font-size: 1.1em;
+}
+
+.ui-widget-header {
+    border: 1px solid #a8a8a8;
+    /*background: #c4c4c4 url(http://localhost:8080/POV_Gaes7/faces/javax.faces.resource/images/ui-bg_highlight-soft_100_c4c4c4_1x100.png?ln=primefaces-aristo) 50% 50% repeat-x;
+    background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
+    background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
+    background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));*/
+    color: #333;
+    background-color: #d9d9d6;
+    font-weight: normal;
+    /*text-shadow: 0px 1px 0px rgba(255,255,255,0.7);*/
+    font-size: 0.8em;
+}
+
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+td{
+  font-size: 0.8em;  
+}
+
+th{
+   font-size: 1em; 
+}
+.ui-paginator a {
+    margin-right: 5px;
+}
 main .tabs .tab a{
     color: black;
 }
@@ -263,7 +319,7 @@ main .fondoTab{
 .registro .botonesControl{
     width: 100%;
     margin-top: 1rem;
-    
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -278,7 +334,7 @@ main .fondoTab{
 .fondoTab table thead{
     background-color: #b71c1c;
     color: white;
- 
+
 }
 
 .fondoTab table tbody td{
@@ -297,7 +353,7 @@ main .fondoTab{
 .msgRemoveContent{
     width: 100%;
     height: 100%;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -317,19 +373,19 @@ main .fondoTab{
 .msgRemoveContent ion-icon{
     color: red;
     font-size: 160px;
-    
+
     margin-bottom: 2rem;
 }
 
 .msgRemoveContent p{
     font-size: 1em;
-    
+
 }
 
 .msgRemoveContent .botonesControl{
     width: 100%;
     margin-top: 2.5rem;
-    
+
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -343,7 +399,7 @@ main .fondoTab{
     color: white;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
-    
+
 }
 
 
