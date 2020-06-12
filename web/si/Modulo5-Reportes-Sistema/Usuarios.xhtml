@@ -21,7 +21,7 @@
         <link rel="shorcut icon" href="../../Resources/img/Sistema/logoVersionFinal.png"/>
         <!-- Nombre que se visualizará en el navegador -->
         <title>Usuarios</title>
-        
+
     </h:head>
     <h:body>
         <div class="Bread">
@@ -137,20 +137,144 @@
 
 
             <div class="row">
-                <div class="contenedorTabs">
-                    <ul class="tabs">
-                        <h:form>
-                        <li class="tab"><a class="active" href="#todos">Todos</a></li>
-                            <c:forEach items="#{rolControlador.consultarRol}" var="r">
+                <h:form>
+                    <div class="contenedorTabs">
+                        <ul class="tabs">
+                            <li class="tab"><a class="active" href="#todos">Todos</a></li>
+                            <c:forEach items="#{rolControlador.consultarRol()}" var="r">
                                 <li class="tab">
                                     <a href="##{r.rol}">#{r.rol}</a>
                                 </li>
                             </c:forEach>
-                        
+                            <p>Patata</p>
+                        </ul>
+                    </div>
+                    <div id="todos" class="col s12 fondoTab">
+
+
+                        <h:form>
+                            <h:commandLink><ion-icon name="logo-windows"></ion-icon><p:dataExporter target="tblCoor" type="xls" fileName="ReporteCoordinador"></p:dataExporter></h:commandLink>
+                            <p:dataTable value="#{usuarioControlador.consultarUsuarios()}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdUsuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idUsuario}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NumerodeDocumento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.numerodeDocumento}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Apellido"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.apellido}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="FechadeNacimiento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechadeNacimiento}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Direccion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.direccion}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Celular"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.celular}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TelefonoFijo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.telefonoFijo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Genero"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.genero}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CorreoElectronico"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.correoElectronico}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Contrasenna"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.contrasenna}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Foto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.foto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estado}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdRoles"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idRoles}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdTipo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idTipo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acudiente"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.acudiente}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Docente"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.docente}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estudiante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estudiante}"/>
+                                </p:column>
+                            </p:dataTable>
                         </h:form>
-                        
-                    </ul>
-                </div>
+
+                    </div>
+                    <c:forEach items="#{rolControlador.consultarRol()}" var="ro">
+                        <div id="#{ro.rol}" class="col s12 fondoTab">
+                            
+                        </div>
+                    </c:forEach>
+                </h:form>
                 <div id="todos" class="col s12 fondoTab">
 
                     <f:view>
