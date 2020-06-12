@@ -101,25 +101,7 @@ public class UsuarioControlador implements Serializable {
         this.tipo = tipo;
     }
 
-    public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
-        int filterInt = getInteger(filterText);
-
-        Usuario usu = (Usuario) value;
-        return usu.getNumerodeDocumento().toLowerCase().contains(filterText)
-                || usu.getIdTipo().getIdTipo() < filterInt
-                || usu.getIdRoles().getIdRoles() < filterInt
-                || usu.getApellido().toLowerCase().contains(filterText)
-                || usu.getNombre().toLowerCase().contains(filterText)
-                || usu.getCelular().toLowerCase().contains(filterText)
-                || usu.getTelefonoFijo().toLowerCase().contains(filterText)
-                || usu.getCorreoElectronico().toLowerCase().contains(filterText)
-                || usu.getDireccion().toLowerCase().contains(filterText);
-
-    }
+    
 
 }
 

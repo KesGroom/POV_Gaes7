@@ -187,11 +187,30 @@ main .tabs{
     align-items: center;
 }
 
-.iconExcel{
-    width: 40px;
-    height: 40px;
-    margin: 0.6rem;
-    
+.chipExcel{
+    width: 10rem;
+    padding: 0.5rem; 
+    background-color: white;
+    display: flex;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    color: black;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    transition: all ease 200ms;
+}
+
+.chipExcel:hover{
+    background-color: #27831e;
+    color: white;
+    border-radius: 10px;
+}
+
+.chipExcel .iconExcel{
+    width: 30px;
+    height: 30px;
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default{
@@ -205,6 +224,28 @@ main .tabs{
     padding: 0.3rem 0.5rem;
     color: #ecebeb;
     
+}
+.ui-panelgrid .ui-panelgrid-cell {
+    border-width: 1px;
+    border-style: solid;
+    
+    padding: 4px 10px;
+}
+
+
+.ui-panelgrid-cell .ui-selectonemenu {
+    width: 12rem !important;
+    background-color: white !important;
+    font-weight: normal;
+    padding: 0.3rem 0.5rem;
+    color: #ecebeb;
+    border: none !important;
+}
+
+.ui-panelgrid-cell .ui-selectonemenu .ui-selectonemenu-trigger {
+    background-color: whitesmoke !important;
+    border: none !important;
+    width: 2.3rem !important;
 }
 
 .ui-widget-header .ui-state-default {
@@ -258,9 +299,6 @@ main .tabs .tab a.active {
     color: #b71c1c;
 }
 
-/*main .tabs .tab a.active{
-    border-bottom: 2px solid #b71c1c;
-}*/
 
 main .tabs .indicator{
     background-color: #b71c1c;
