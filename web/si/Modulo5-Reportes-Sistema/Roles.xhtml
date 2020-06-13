@@ -2,13 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <!-- Se enlaza a los estilos proporcionados por el framework materialize -->
         <link href="../../Resources/css/materialize.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <!-- Se vincula los estilos css específicos de la página-->
         <link href="../../Resources/css/Users.css" rel="stylesheet" type="text/css"/>
+        <!--Estilos desarrollados para "mejorar" el uso de PrimeFaces en el sistema-->
+        <link href="../../Resources/css/EstilosPrimefaces.css" rel="stylesheet" type="text/css"/>
         <!-- Este script se encarga de implementar los prefijos necesarios para algunas funciones y estilos
         de cada navegador, se coloca en el inicio ya que es necesario que cargue estos prefijos antes de que
         la página inicie para evitar fallos-->
@@ -128,50 +131,64 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="tabs">
-                        <li class="tab col s2"><a class="active" href="#todos">Todos</a></li>
+                        <li class="tab col s2"><a class="active" href="#roleo">Roles</a></li>
+                        <li class="tab col s2"><a href="#tipo">Tipo de documento</a></li>
                     </ul>
                 </div>
-                <div id="todos" class="col fondoTab">
+                <div id="roleo" class="col fondoTab">
                     <f:view>
 
 
                         <h:form>
-
-                            <h:dataTable styleClass="centered" value="#{rolControlador.consultarRol()}" var="Rol">
-                                <h:column>
+                            <p:dataTable value="#{rolControlador.consultarRol()}" var="Rol">
+                                <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Id Rol"/>
-                                    </f:facet>
-                                    <h:outputText value="#{Rol.idRoles}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre del rol"/>
+                                        <h:outputText value="Nombre del Rol"/>
                                     </f:facet>
                                     <h:outputText value="#{Rol.rol}"/>
-                                </h:column>
-                                <h:column>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Opciones"/>
+                                        <h:outputText value=""/>
                                     </f:facet>
-                                    <a class="modal-trigger" href="#eliminarRol"><ion-icon id="btnTrash" name="trash-outline"></ion-icon></a>
-                                    
-                                </h:column>
-                            </h:dataTable>
-                            <div class="modal" id="eliminarRol">
-                                <div class="modal-content">
-                                    <div class="msgRemoveContent">
-                                        <ion-icon name="alert-circle-outline"></ion-icon>
-                                        <p>Si se elimina este registro no se podrá recuperar</p>
-                                        <p>¿Desea continuar?</p>
-                                        <div class="botonesControl">
-                                            <input type="reset" class="modal-close red darken-4 waves-effect waves-light" id="btnCancelModal" value="No, Cancelar"></input>
-                                            <h:commandButton value="Si, Eliminar" id="btnAcceptModal" styleClass=" green lighten-1 waves-effect waves-light" action="#{rolControlador.eliminar(rolEliminar)}"></h:commandButton>
-                                        </div>
+                                    <div class="botonesControl">
+                                        <h:commandLink><ion-icon class="btnUpdate" name="repeat"></ion-icon></h:commandLink>
+                                        <h:commandLink action="#{rolControlador.remover(Rol)}"><ion-icon class="btnTrash" name="trash-outline"></ion-icon></h:commandLink>
                                     </div>
-                                </div>
-                            </div>
+                                </p:column>
+                            </p:dataTable>
                         </h:form>
+
+
+                    </f:view>
+
+                </div>
+                
+                <div id="tipo" class="col fondoTab">
+                    <f:view>
+
+
+                        <h:form>
+                            <p:dataTable value="#{tipoControlador.consultarTodos()}" var="Tipin">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Tipo de documento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{Tipin.tipo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value=""/>
+                                    </f:facet>
+                                    <div class="botonesControl">
+                                        <h:commandLink><ion-icon class="btnUpdate" name="repeat"></ion-icon></h:commandLink>
+                                        <h:commandLink action="#{tipoControlador.remove(Tipitin)}"><ion-icon class="btnTrash" name="trash-outline"></ion-icon></h:commandLink>
+                                    </div>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+
+
                     </f:view>
 
                 </div>

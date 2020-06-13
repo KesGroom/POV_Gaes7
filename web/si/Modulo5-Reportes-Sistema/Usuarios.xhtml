@@ -13,6 +13,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <!-- Se vincula los estilos css específicos de la página-->
         <link href="../../Resources/css/Users.css" rel="stylesheet" type="text/css"/>
+        <!--Estilos desarrollados para "mejorar" el uso de PrimeFaces en el sistema-->
+        <link href="../../Resources/css/EstilosPrimefaces.css" rel="stylesheet" type="text/css"/>
         <!-- Este script se encarga de implementar los prefijos necesarios para algunas funciones y estilos
         de cada navegador, se coloca en el inicio ya que es necesario que cargue estos prefijos antes de que
         la página inicie para evitar fallos-->
@@ -47,7 +49,7 @@
                         <p:outputLabel value="Apellido:" for="apellido" />
                         <p:inputText id="apellido" value="#{usuarioControlador.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
                         <p:outputLabel value="FechadeNacimiento:" for="fechadeNacimiento" />
-                        <p:inputText id="fechadeNacimiento" type="date"  value="#{usuarioControlador.usuario.fechadeNacimiento}" title="FechadeNacimiento" required="true" requiredMessage="The FechadeNacimiento field is required.">
+                        <p:inputText id="fechadeNacimiento" type="date" class="black-text" value="#{usuarioControlador.usuario.fechadeNacimiento}" title="FechadeNacimiento" required="true" requiredMessage="The FechadeNacimiento field is required.">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
                         </p:inputText>
                         <p:outputLabel value="Direccion:" for="direccion" />
@@ -57,7 +59,11 @@
                         <p:outputLabel value="Telefono Fijo:" for="telefonoFijo" />
                         <p:inputText id="telefonoFijo" value="#{usuarioControlador.usuario.telefonoFijo}" title="TelefonoFijo" required="true" requiredMessage="The TelefonoFijo field is required."/>
                         <p:outputLabel value="Genero:" for="genero" />
-                        <p:inputText id="genero" value="#{usuarioControlador.usuario.genero}" title="Genero" required="true" requiredMessage="The Genero field is required."/>
+                        <p:selectOneMenu value="#{usuarioControlador.usuario.genero}" id="genero">
+                            <f:selectItem itemValue="0" itemLabel="--Seleccione--" noSelectionOption="true"></f:selectItem>
+                            <f:selectItem itemValue="Femenino" itemLabel="Femenino"></f:selectItem>
+                            <f:selectItem itemValue="Masculino" itemLabel="Masculino"></f:selectItem>
+                        </p:selectOneMenu>
                         <p:outputLabel value="Correo Electronico:" for="correoElectronico" />
                         <p:inputText id="correoElectronico" value="#{usuarioControlador.usuario.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
                         <p:outputLabel value="Contraseña:" for="contrasenna" />
@@ -65,14 +71,17 @@
                         <p:outputLabel value="IdRoles:" for="idRoles" />
                         <p:selectOneMenu id="idRoles" value="#{usuarioControlador.rol.idRoles}" required="true" requiredMessage="The IdRoles field is required.">
                             <!-- TODO: update below reference to list of available items-->
+                            <f:selectItem itemLabel="--Seleccione--" itemValue="0" noSelectionOption="true"></f:selectItem>
                             <f:selectItems value="#{rolControlador.consultarRol()}" var="rola" itemLabel="#{rola.rol}" itemValue="#{rola.idRoles}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="IdTipo:" for="idTipo" />
                         <p:selectOneMenu id="idTipo" value="#{usuarioControlador.tipo.idTipo}" required="true" requiredMessage="The IdTipo field is required.">
                             <!-- TODO: update below reference to list of available items-->
+                            <f:selectItem itemLabel="--Seleccione--" itemValue="0" noSelectionOption="true"></f:selectItem>
                             <f:selectItems value="#{tipoControlador.consultarTodos()}" var="tip" itemLabel="#{tip.tipo}" itemValue="#{tip.idTipo}"/>
                         </p:selectOneMenu>
-
+                        <h:inputHidden value="#{usuarioControlador.usuario.estado}"></h:inputHidden>
+                        <h:inputHidden value="#{usuarioControlador.usuario.foto}"></h:inputHidden>
                     </p:panelGrid>
                     <div class="botonesControl">
                         <input type="reset" class=" red darken-4 waves-effect waves-light" value="Vaciar"></input>
@@ -193,6 +202,15 @@
                                     </f:facet>
                                     <h:outputText value="#{usuAll.correoElectronico}"/>
                                 </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value=""/>
+                                    </f:facet>
+                                    <div class="botonesControl">
+                                        <h:commandLink><ion-icon class="btnUpdate" name="repeat"></ion-icon></h:commandLink>
+                                        <h:commandLink action="#{usuarioControlador.Remover(usuAll)}"><ion-icon class="btnTrash" name="trash-outline"></ion-icon></h:commandLink>
+                                    </div>
+                                </p:column>
                             </p:dataTable>
                         </h:form>
 
@@ -254,6 +272,16 @@
                                             </f:facet>
                                             <h:outputText value="#{rolUsu.correoElectronico}"/>
                                         </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value=""/>
+                                            </f:facet>
+                                            <div class="botonesControl">
+                                                <h:commandLink><ion-icon class="btnUpdate" name="repeat"></ion-icon></h:commandLink>
+                                                <h:commandLink action="#{usuarioControlador.Remover(rolUsu)}"><ion-icon class="btnTrash" name="trash-outline"></ion-icon></h:commandLink>
+                                            </div>
+                                        </p:column>
+
                                     </p:dataTable>
                                 </h:form>
                             </f:view>
@@ -270,7 +298,7 @@
         <!-- Se enlaza a las funciones y eventos proporcionados por el framework materialize -->
         <script src="../../Resources/js/materialize.min.js" type="text/javascript"></script>
         <!-- Se vincula al script AutoIniti el cual contiene el inicializador automático de los elementos de materialize -->
-        <script>
+        <script type="text/javascript">
             M.AutoInit();
         </script>
         <!-- Se hace uso de la iconografia de ionicons -->
@@ -278,7 +306,7 @@
         <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
         <!-- Se vincula los scripts propios de la página-->
         <script src="../../Resources/js/UsersPage.js" type="text/javascript"></script>
-        
+
 
     </h:body>
 </html>

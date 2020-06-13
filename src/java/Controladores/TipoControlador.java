@@ -34,14 +34,16 @@ public class TipoControlador implements Serializable {
      TipoFacade tipoFacade;
      
      public String registrar(){
-         
+         tipo.setEstado(1);
          tipoFacade.create(tipo);
          
          return "Tipos";
      }
      
-     public void eliminar(Tipo tipoEliminar){
-         tipoFacade.remove(tipoEliminar);
+     public void remove(Tipo tipoRemover){
+         tipo = tipoRemover;
+         tipo.setEstado(2);
+         tipoFacade.edit(tipo);
      }
      
      public void consultarId(int id){

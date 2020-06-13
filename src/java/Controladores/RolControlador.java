@@ -35,14 +35,23 @@ public class RolControlador implements Serializable {
     
    
     public String registrar(){
+        rol.setEstado(1);
         rolFacade.create(rol);
         
+        rol = new Rol();
         return "Roles";
     }
     
     public List<Rol> consultarRol(){
         return rolFacade.consultarRol(1);
     }
+    
+    public void remover(Rol rolRemover){
+        rol = rolRemover;
+        rol.setEstado(2);
+        rolFacade.edit(rol);
+    }        
+
     
     public void consultarId(int id){
         rol = rolFacade.find(id);

@@ -54,7 +54,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public List<Usuario> consultarUsuario(int estado) {
-        Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.estado=:estado");
+        Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.estado=:estado ORDER BY u.idUsuario DESC");
         q.setParameter("estado", estado);
         return q.getResultList();
     }

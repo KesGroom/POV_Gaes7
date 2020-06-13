@@ -2,13 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <!-- Se enlaza a los estilos proporcionados por el framework materialize -->
         <link href="../../Resources/css/materialize.min.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <!-- Se vincula los estilos css específicos de la página-->
         <link href="../../Resources/css/Users.css" rel="stylesheet" type="text/css"/>
+        <!--Estilos desarrollados para "mejorar" el uso de PrimeFaces en el sistema-->
+        <link href="../../Resources/css/EstilosPrimefaces.css" rel="stylesheet" type="text/css"/>
         <!-- Este script se encarga de implementar los prefijos necesarios para algunas funciones y estilos
         de cada navegador, se coloca en el inicio ya que es necesario que cargue estos prefijos antes de que
         la página inicie para evitar fallos-->
@@ -133,23 +136,30 @@
                 <div id="todos" class="col fondoTab">
                     <f:view>
 
+
                         <h:form>
-                            
-                            <h:dataTable styleClass="centered" value="#{tipoControlador.consultarTodos()}" var="tipo">
-                                <h:column>
+                            <p:dataTable value="#{tipoControlador.consultarTodos()}" var="item">
+                                <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Id Tipo"/>
+                                        <h:outputText value="IdTipo"/>
                                     </f:facet>
-                                    <h:outputText value="#{tipo.idTipo}"/>
-                                </h:column>
-                                <h:column>
+                                    <h:outputText value="#{item.idTipo}"/>
+                                </p:column>
+                                <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Tipo de documento"/>
+                                        <h:outputText value="Tipo"/>
                                     </f:facet>
-                                    <h:outputText value="#{tipo.tipo}"/>
-                                </h:column>
-                            </h:dataTable>
+                                    <h:outputText value="#{item.tipo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estado}"/>
+                                </p:column>
+                            </p:dataTable>
                         </h:form>
+
 
                     </f:view>
 

@@ -54,6 +54,8 @@ public class UsuarioControlador implements Serializable {
     TipoFacade tipoFacade;
 
     public String registrarUsu() {
+        usuario.setEstado(1);
+        usuario.setFoto("../img/imgPerfil/default-user.png");
         usuario.setIdRoles(rolFacade.find(rol.getIdRoles()));
         usuario.setIdTipo(tipoFacade.find(tipo.getIdTipo()));
         usuarioFacade.create(usuario);
@@ -62,11 +64,10 @@ public class UsuarioControlador implements Serializable {
         return "Usuarios";
     }
 
-    public String Remover(Usuario usuarioRemover) {
+    public void Remover(Usuario usuarioRemover) {
         usuario = usuarioRemover;
         usuario.setEstado(2);
         usuarioFacade.edit(usuario);
-        return "Usuarios";
     }
 
     public List<Usuario> consultarUsuarios() {
